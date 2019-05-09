@@ -182,4 +182,102 @@ class Elementor_ACF_Repeater {
 		// Register widget.
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_ACF_Repeater_Widget() );
 	}
+
+	/**
+	 * Updates the html tag control with the 'a' tag and adds a url control
+	 * that is visible only when the html tag is set to a.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @param Elementor\Element_Base $element The edited element.
+	 * @param string                 $section_id Current section id.
+	 * @param array                  $args The $args that sent to $element->start_controls_section.
+	 *
+	 * @return void
+	 */
+	public function modify_section_controls( $element, $section_id, $args ) {
+		// Ensure we are modifying the correct section.
+		if ( 'section_layout' === $section_id ) {
+			// Store current html tag control.
+			$html_tag_control = $element->get_controls( 'html_tag' );
+			// Add a element to control's options array.
+			$html_tag_control['options']['a'] = 'a';
+			// Inject changes to the html tag control.
+			$element->update_control(
+				'html_tag',
+				[
+					'options' => $html_tag_control['options'],
+				]
+			);
+			// Get position of the html tag control.
+			$position = $element->get_control_index( 'html_tag' ) + 1;
+			// Add a new url control right after the html tag control.
+			$element->add_control(
+				'section_link',
+				[
+					'label'     => __( 'Link', 'elementor' ),
+					'type'      => 'url',
+					'dynamic'   => [
+						'active' => true,
+					],
+					'default'   => [
+						'url' => '',
+					],
+					'condition' => [
+						'html_tag' => 'a',
+					],
+				],
+				[
+					'position' => [
+						'type' => 'control',
+						'at'   => 'after',
+						'of'   => 'html_tag',
+					],
+				]
+			);
+		}
+	}
+
+	/**
+	 * Add render attributes to a section if link settings have been set.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @param Element_Base $element The element instance.
+	 * @return void
+	 */
+	public function modify_section_render( $element ) {
+		// Make sure we are working with a section element.
+		if ( 'section' !== $element->get_type() ) {
+			return;
+		}
+
+		// Store the section settings.
+		$settings = $element->get_settings_for_display();
+
+		// Bail early if the html_tag is not an a or a link was never set.
+		if ( 'a' !== $settings['html_tag'] || ! isset( $settings['section_link'] ) ) {
+			return;
+		}
+
+		// Process only if a url is available.
+		if ( ! empty( $settings['section_link']['url'] ) ) {
+			// Add href render attribute with the url.
+			$element->add_render_attribute( '_wrapper', 'href', $settings['section_link']['url'] );
+
+			// Set target attribute.
+			if ( $settings['section_link']['is_external'] ) {
+				$element->add_render_attribute( '_wrapper', 'target', '_blank' );
+			}
+
+			// Set nofollow attribute.
+			if ( ! empty( $settings['section_link']['nofollow'] ) ) {
+				$element->add_render_attribute( '_wrapper', 'rel', 'nofollow' );
+			}
+		}
+	}
 }
