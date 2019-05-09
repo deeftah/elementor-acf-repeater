@@ -31,7 +31,18 @@ class Module {
 		wp_enqueue_script( 'elementor-acf-repeater', plugin_dir_url( __DIR__ ) . '/assets/js/elementor-acf-repeater.js', [], '1.0.0', true );
 	}
 
-	public function register_ajax_actions() {
+	/**
+	 * Register ajax actions with Elementor.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @param Elementor\Core\Base\Module $ajax Instance of Elementor base Module.
+	 * @return void
+	 */
+	public function register_ajax_actions( $ajax ) {
+		$ajax->register_ajax_action( 'update_dynamic_tag_controls', [ $this, 'ajax_update' ] );
 	}
 
 	public function ajax_update( $params ) {
