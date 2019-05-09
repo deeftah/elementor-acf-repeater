@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+require_once __DIR__ . '/classes/acf-repeater-metabox.php';
+
 /**
  * Responsible for
  */
@@ -133,5 +135,8 @@ class Elementor_ACF_Repeater {
 			add_action( 'admin_notices', [ $this, 'admin_notice_minimum_php_version' ] );
 			return;
 		}
+
+		// Initialize the plugin metabox.
+		Elementor_ACF_Repeater_Metabox::init();
 	}
 }
