@@ -289,4 +289,60 @@ class Elementor_ACF_Repeater {
 			$dynamic_tags->register_tag( $class );
 		}
 	}
+
+	/**
+	 * Retrieve available Section templates for template widget.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @access public
+	 *
+	 * @param array $results Empty array used to hold filtered query results.
+	 * @param array $data Array of query data.
+	 * @return array $results Autocomplete options to display.
+	 */
+	public function get_autocomplete_for_acf_repeater_widget( $results, $data ) {
+		// Store all registered document types.
+		$document_types = \Elementor\Plugin::instance()->documents->get_document_types(
+			[
+				'show_in_library' => true,
+			]
+		);
+
+		// Setup WP_Query arguments to retrieve Elementor Section templates.
+		$query_params = [
+			's'              => $data['q'],
+			'post_type'      => \Elementor\TemplateLibrary\Source_Local::CPT,
+			'posts_per_page' => -1,
+			'orderby'        => 'meta_value',
+			'order'          => 'ASC',
+			'meta_query'     => [
+				[
+					'key'     => \Elementor\Core\Base\Document::TYPE_META_KEY,
+					'value'   => [ 'section' ],
+					'compare' => 'IN',
+				],
+			],
+		];
+
+		// Store query result.
+		$query = new \WP_Query( $query_params );
+
+		// Iterate over the query results.
+		foreach ( $query->posts as $post ) {
+			// Get Elementor Document instance for the current post.
+			$document = \Elementor\Plugin::instance()->documents->get( $post->ID );
+
+			// Process if Document was actually found.
+			if ( $document ) {
+				// Append results.
+				$results[] = [
+					'id'   => $post->ID,
+					'text' => $post->post_title . ' (' . $document->get_post_type_title() . ')',
+				];
+			}
+		}
+
+		return $results;
+	}
 }
