@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Responsible for 
+ * Responsible for
  */
 class Elementor_ACF_Repeater {
 	/**
@@ -53,4 +53,24 @@ class Elementor_ACF_Repeater {
 	 * @var Elementor_ACF_Repeater The single instance of the class.
 	 */
 	private static $_instance = null;
+
+	/**
+	 * Instance
+	 *
+	 * Ensures only one instance of the class is loaded or can be loaded.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 * @static
+	 *
+	 * @return Elementor_ACF_Repeater An instance of the class.
+	 */
+	public static function instance() {
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
+
+	}
 }
