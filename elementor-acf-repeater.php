@@ -73,4 +73,48 @@ class Elementor_ACF_Repeater {
 		return self::$_instance;
 
 	}
+
+	/**
+	 * Constructor
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function __construct() {
+		add_action( 'init', [ $this, 'i18n' ] );
+		add_action( 'plugins_loaded', [ $this, 'init' ] );
+	}
+
+	/**
+	 * Load Textdomain
+	 *
+	 * Load plugin localization files.
+	 *
+	 * Fired by `init` action hook.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function i18n() {
+		load_plugin_textdomain( 'elementor-test-extension' );
+	}
+
+	/**
+	 * Initialize the plugin
+	 *
+	 * Load the plugin only after Elementor (and other plugins) are loaded.
+	 * Checks for basic plugin requirements, if one check fail don't continue,
+	 * if all check have passed load the files required to run the plugin.
+	 * Define additional WP hooks.
+	 *
+	 * Fired by `plugins_loaded` action hook.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function init() {
+	}
 }
