@@ -235,7 +235,7 @@ class Elementor_ACF_Repeater {
 	 *
 	 * @access public
 	 *
-	 * @param Element_Base $element The element instance.
+	 * @param Elementor\Element_Base $element The element instance.
 	 * @return void
 	 */
 	public function modify_section_render( $element ) {
