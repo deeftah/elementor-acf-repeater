@@ -17,7 +17,18 @@ class Module {
 		add_action( 'elementor/ajax/register_actions', [ $this, 'register_ajax_actions' ] );
 	}
 
+	/**
+	 * Enqueue javascript for Elementor editor.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @return void
+	 */
 	public function enqueue_scripts() {
+		wp_register_script( 'elementor-acf-repeater', plugin_dir_url( __DIR__ ) . '/assets/js/elementor-acf-repeater.js', [], '1.0.0', true );
+		wp_enqueue_script( 'elementor-acf-repeater', plugin_dir_url( __DIR__ ) . '/assets/js/elementor-acf-repeater.js', [], '1.0.0', true );
 	}
 
 	public function register_ajax_actions() {
