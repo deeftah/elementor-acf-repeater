@@ -101,6 +101,51 @@ class Module {
 		];
 	}
 
+	/**
+	 * Returns a dynamic tag control options.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @param array $types The supported types for the tag.
+	 * @return array $groups Array of options.
+	 */
 	public static function get_control_options( $types ) {
+		// Instantiate return value.
+		$groups = [];
+
+		// Store repeater field key meta for the current post.
+		$repeater_key = get_post_meta( get_the_ID(), '_ear_field', true );
+
+		// Bail if no repeater key is set.
+		if ( '' === $repeater_key ) {
+			return $groups;
+		}
+
+		// Store the sub fields of the repeater field.
+		$repeater   = acf_get_field( $repeater_key );
+		$sub_fields = $repeater['sub_fields'];
+
+		// Instantiate options.
+		$options = [];
+
+		// Iterate over all sub fields.
+		foreach ( $sub_fields as $sub_field ) {
+			// Add sub field key and label if it is a supported type.
+			if ( in_array( $sub_field['type'], $types ) ) {
+				$key = $sub_field['key'];
+
+				$options[ $key ] = $sub_field['label'];
+			}
+		}
+
+		// Add a label and options to the groups.
+		$groups[] = [
+			'label'   => $repeater['label'],
+			'options' => $options,
+		];
+
+		return $groups;
 	}
 }
