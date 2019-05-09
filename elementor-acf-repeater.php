@@ -5,9 +5,12 @@
  * Version:     1.0.0
  * Author:      Justin Kucerak
  * Text Domain: elementor-acf-repeater
- * 
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class Elementor_ACF_Repeater {
-    
+
 }
