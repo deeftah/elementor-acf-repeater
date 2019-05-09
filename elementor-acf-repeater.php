@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once __DIR__ . '/classes/acf-repeater-metabox.php';
 
 /**
- * Responsible for
+ * Responsible for setting up the plugin.
  */
 class Elementor_ACF_Repeater {
 	/**
