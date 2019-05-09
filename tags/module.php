@@ -84,7 +84,21 @@ class Module {
 		return $result;
 	}
 
+	/**
+	 * Return array of tag classes
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @return array
+	 */
 	public static function get_tag_classes_names() {
+		return [
+			'ACF_Repeater_Text',
+			'ACF_Repeater_Image',
+			'ACF_Repeater_URL',
+		];
 	}
 
 	public static function get_control_options( $types ) {
