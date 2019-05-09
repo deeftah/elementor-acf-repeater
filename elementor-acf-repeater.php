@@ -147,19 +147,7 @@ class Elementor_ACF_Repeater {
 		add_action( 'elementor/frontend/before_render', [ $this, 'modify_section_render' ], 10, 1 );
 
 		// Add in new Dynamic Tags.
-		add_action(
-			'elementor/dynamic_tags/register_tags',
-			function( $dynamic_tags ) {
-				// Register each tag class.
-				foreach ( ACF_Repeater_Module::get_tag_classes_names() as $class ) {
-					// Modify class name to match file name structure.
-					$class_file = strtolower( str_replace( '_', '-', $class ) );
-					// Include tag class file and register.
-					include_once 'tags/' . $class_file . '.php';
-					$dynamic_tags->register_tag( $class );
-				}
-			}
-		);
+		add_action( 'elementor/dynamic_tags/register_tags', [ $this, 'register_tags' ] );
 
 		// Setup method to populate widget dropdown control.
 		add_filter( 'elementor_pro/query_control/get_autocomplete/library_widget_section_templates', [ $this, 'get_autocomplete_for_acf_repeater_widget' ], 10, 2 );
@@ -278,6 +266,27 @@ class Elementor_ACF_Repeater {
 			if ( ! empty( $settings['section_link']['nofollow'] ) ) {
 				$element->add_render_attribute( '_wrapper', 'rel', 'nofollow' );
 			}
+		}
+	}
+
+	/**
+	 * Registers new dynamic tags with Elementor.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @param Elementor\Core\DynamicTags\Manager $dynamic_tags Manager instance.
+	 * @return void
+	 */
+	public function register_tags( $dynamic_tags ) {
+		// Register each tag class.
+		foreach ( ACF_Repeater_Module::get_tag_classes_names() as $class ) {
+			// Modify class name to match file name structure.
+			$class_file = strtolower( str_replace( '_', '-', $class ) );
+			// Include tag class file and register.
+			include_once 'tags/' . $class_file . '.php';
+			$dynamic_tags->register_tag( $class );
 		}
 	}
 }
