@@ -138,5 +138,31 @@ class Elementor_ACF_Repeater {
 
 		// Initialize the plugin metabox.
 		Elementor_ACF_Repeater_Metabox::init();
+
+		// Register widget(s).
+		add_action( 'elementor/widgets/widgets_registered', [ $this, 'init_widgets' ] );
+
+		// Modify Elementor Section behavrior.
+		add_action( 'elementor/element/before_section_end', [ $this, 'modify_section_controls' ], 10, 3 );
+		add_action( 'elementor/frontend/before_render', [ $this, 'modify_section_render' ], 10, 1 );
+
+		// Add in new Dynamic Tags.
+		add_action(
+			'elementor/dynamic_tags/register_tags',
+			function( $dynamic_tags ) {
+				// Register each tag class.
+				foreach ( ACF_Repeater_Module::get_tag_classes_names() as $class ) {
+					// Modify class name to match file name structure.
+					$class_file = strtolower( str_replace( '_', '-', $class ) );
+					// Include tag class file and register.
+					include_once 'tags/' . $class_file . '.php';
+					$dynamic_tags->register_tag( $class );
+				}
+			}
+		);
+
+		// Setup method to populate widget dropdown control.
+		add_filter( 'elementor_pro/query_control/get_autocomplete/library_widget_section_templates', [ $this, 'get_autocomplete_for_acf_repeater_widget' ], 10, 2 );
+		add_filter( 'elementor_pro/query_control/get_value_titles/library_widget_section_templates', [ $this, 'get_value_title_for_acf_repeater_widget' ], 10, 2 );
 	}
 }
