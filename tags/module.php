@@ -5,7 +5,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Module {
+	/**
+	 * Constructor.  Define hooks and filters.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
 	public function __construct() {
+		add_action( 'elementor/editor/before_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+		add_action( 'elementor/ajax/register_actions', [ $this, 'register_ajax_actions' ] );
 	}
 
 	public function enqueue_scripts() {
