@@ -165,4 +165,21 @@ class Elementor_ACF_Repeater {
 		add_filter( 'elementor_pro/query_control/get_autocomplete/library_widget_section_templates', [ $this, 'get_autocomplete_for_acf_repeater_widget' ], 10, 2 );
 		add_filter( 'elementor_pro/query_control/get_value_titles/library_widget_section_templates', [ $this, 'get_value_title_for_acf_repeater_widget' ], 10, 2 );
 	}
+
+	/**
+	 * Init Widgets
+	 *
+	 * Include widgets files and register them
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function init_widgets() {
+		// include Widget files.
+		require_once __DIR__ . '/widgets/elementor-acf-repeater-widget.php';
+
+		// Register widget.
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_ACF_Repeater_Widget() );
+	}
 }
