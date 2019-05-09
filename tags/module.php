@@ -4,6 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Defines common functions for dynamic tags.
+ */
 class Module {
 	/**
 	 * Constructor.  Define hooks and filters.
@@ -75,7 +78,7 @@ class Module {
 			include_once $class_file . '.php'; // Include tag class file.
 
 			// Store supported types for the tag.
-			$types = $name::get_fields();
+			$types = $name::$supported_fields;
 
 			// Store the control options for the tag.
 			$result['tags'][ $class_file ] = self::get_control_options( $types );
