@@ -4,6 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+require_once 'module.php';
+
 /**
  * Defines the ACF Repeater URL dynamic tag.
  */
@@ -69,7 +71,7 @@ class Elementor_ACF_Repeater_URL extends ElementorPro\Modules\DynamicTags\ACF\Ta
 			[
 				'label'  => __( 'Key', 'elementor-pro' ),
 				'type'   => \Elementor\Controls_Manager::SELECT,
-				'groups' => ACF_Repeater_Module::get_control_options( $this->get_supported_fields() ),
+				'groups' => Module::get_control_options( $this->get_supported_fields() ),
 			]
 		);
 
@@ -172,11 +174,10 @@ class Elementor_ACF_Repeater_URL extends ElementorPro\Modules\DynamicTags\ACF\Ta
 	/**
 	 * Render
 	 *
-	 * Prints out the value of the Dynamic tag
+	 * Returns the supported fields for the tag.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @access public
+	 * @access protected
 	 *
 	 * @return array
 	 */
