@@ -38,7 +38,7 @@ class Elementor_ACF_Repeater_URL extends ElementorPro\Modules\DynamicTags\ACF\Ta
 	 * @return string
 	 */
 	public function get_name() {
-		return 'acf-repeater-url';
+		return 'elementor-acf-repeater-url';
 	}
 
 	/**

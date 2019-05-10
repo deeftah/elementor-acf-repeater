@@ -47,7 +47,7 @@ class Elementor_ACF_Repeater_Text extends ElementorPro\Modules\DynamicTags\ACF\T
 	 * @return string
 	 */
 	public function get_name() {
-		return 'acf-repeater-text';
+		return 'elementor-acf-repeater-text';
 	}
 
 	/**
