@@ -101,6 +101,8 @@ class Module {
 			'Elementor_ACF_Repeater_Text',
 			'Elementor_ACF_Repeater_Image',
 			'Elementor_ACF_Repeater_URL',
+			'Elementor_ACF_Repeater_Gallery',
+			'Elementor_ACF_Repeater_File',
 		];
 	}
 
