@@ -98,9 +98,9 @@ class Module {
 	 */
 	public static function get_tag_classes_names() {
 		return [
-			'ACF_Repeater_Text',
-			'ACF_Repeater_Image',
-			'ACF_Repeater_URL',
+			'Elementor_ACF_Repeater_Text',
+			'Elementor_ACF_Repeater_Image',
+			'Elementor_ACF_Repeater_URL',
 		];
 	}
 
