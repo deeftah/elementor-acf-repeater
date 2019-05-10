@@ -81,7 +81,6 @@ class Elementor_ACF_Repeater_Text extends ElementorPro\Modules\DynamicTags\ACF\T
 				'label'      => __( 'Repeater Field', 'elementor-pro' ),
 				'type'       => \Elementor\Controls_Manager::SELECT,
 				'groups'     => Module::get_control_options( self::$supported_fields ),
-				'data-class' => __CLASS__,
 			]
 		);
 	}
