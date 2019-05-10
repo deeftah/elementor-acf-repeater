@@ -19,7 +19,7 @@ Use the following steps
   - Save the group.
 - Edit a Post/Page/CPT/etc. that matches the Location rules of the field group.
   - Fill out a few rows of the repeater field with data.
-- Create an Elementor section template. If you are editing an existing Section template, skip to #4.
+- Create an Elementor section template. If you are editing an existing Section template, skip to iv.
   1. Close the popup, if there is one, and exit to the dashboard by click the top left hamburger menu and selecting EXIT TO DASHBOARD.
   2. In the ACF Repeater Selection metabox; select which repeater field you want access to within the template.
   3. Either Save Draft or Publish the Section template.
@@ -29,16 +29,16 @@ Use the following steps
   7. Scroll down to the ACF group.  If you do not see the group then the field type is not supported.
   8. Select the 'ACF Repeater *type*' tag that corresponds to a ACF field type of at least on field from the Repeater you chose in step #2.
   9. Click anywhere in the textbox that holds the tag you selected to show the settings popup.
-  10. Click the Repeater Field dropdown and select the field you want to get data from.  Continue to step #11 the dropdown is empty, or continue to step #16 if the select box holds the field name you are looking for.
+  10. Click the Repeater Field dropdown and select the field you want to get data from.  Continue to step xi the dropdown is empty, or continue to step xvi if the select box holds the field name you are looking for.
   11. Click the Settings gear icon in the bottom left corner of the screen.
   12. Expand Preview Settings.
   13. Choose a Post/Page/CPT/etc. that has the ACF Repeater field filled out with data.
   14. Click Apply & Preview.
-  15. Select the widget you dropped in and start again at step #9.
-  16. Repeat from step #5 until you have a widget that corresponds to each field in the Repeater.
+  15. Select the widget you dropped in and start again at step ix.
+  16. Repeat from step v until you have a widget that corresponds to each field in the Repeater.
   17. Modify the look as you desire.
   18. Publish the template.
-- You can now utilize the Section template when editing anything with elementor that has the repeater field you selected in step #2 attached to it.
+- You can now utilize the Section template when editing anything with elementor that has the repeater field you selected in step ii attached to it.
   - Edit a Post/Page/CPT/Template/etc. with Elementor.
   - Drop in the ACF Repeater Template widget.  Select the section Widget that was created.
   - Modify the layout settings. (TODO: Add layout settings.)
