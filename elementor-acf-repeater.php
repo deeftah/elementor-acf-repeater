@@ -11,7 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-require_once __DIR__ . '/classes/acf-repeater-metabox.php';
+require_once __DIR__ . '/classes/elementor-acf-repeater-metabox.php';
+require_once __DIR__ . '/tags/module.php';
 
 /**
  * Responsible for setting up the plugin.
@@ -152,6 +153,8 @@ class Elementor_ACF_Repeater {
 		// Setup method to populate widget dropdown control.
 		add_filter( 'elementor_pro/query_control/get_autocomplete/library_widget_section_templates', [ $this, 'get_autocomplete_for_acf_repeater_widget' ], 10, 2 );
 		add_filter( 'elementor_pro/query_control/get_value_titles/library_widget_section_templates', [ $this, 'get_value_title_for_acf_repeater_widget' ], 10, 2 );
+
+		new Module();
 	}
 
 	/**
@@ -281,7 +284,7 @@ class Elementor_ACF_Repeater {
 	 */
 	public function register_tags( $dynamic_tags ) {
 		// Register each tag class.
-		foreach ( ACF_Repeater_Module::get_tag_classes_names() as $class ) {
+		foreach ( Module::get_tag_classes_names() as $class ) {
 			// Modify class name to match file name structure.
 			$class_file = strtolower( str_replace( '_', '-', $class ) );
 			// Include tag class file and register.
@@ -346,3 +349,5 @@ class Elementor_ACF_Repeater {
 		return $results;
 	}
 }
+
+Elementor_ACF_Repeater::instance();
